@@ -4,8 +4,13 @@ var redis = require('../model/redis');
 function users(server) {
 	server.on('connect', function (client) {
 		client.on("authenticate", function (opts, cb) {
-			debug('authenticate');
-			cb(null, opts);
+			debug('authenticate',opts.jid);
+			redis.findUser(opts.jid,function(err,res){
+				if(!err)
+					cb(null, opts);
+				else
+					cb(null);
+			})
 		});
 		client.on("register", function (opts, cb) {
 			debug('register');
