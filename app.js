@@ -8,12 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var xmpp = require('node-xmpp');
-var config = require('jsconfig'),
- defaultConfigPath = path.join(__dirname, "config.js");
-config.defaults(defaultConfigPath);
-
-var server = new xmpp.C2SServer(config);
+var xmpp = require('./api/server');
 
 var app = express();
 
