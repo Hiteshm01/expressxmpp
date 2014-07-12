@@ -2,9 +2,9 @@ var debug = require('debug')('redis');
 var redis = require("redis"),
     client = redis.createClient();
 
-var redis = {};
+var redisModel = {};
 
-redis.findUser = function(jid, cb) {
+redisModel.findUser = function(jid, cb) {
     client.sismember("user", jid.local, function(err, obj) {
         if(!obj) {
             debug('User found jid:',jid);
@@ -17,14 +17,14 @@ redis.findUser = function(jid, cb) {
     });
 };
 
-redis.registerUser = function(jid, password) {
+redisModel.registerUser = function(jid, password) {
     debug('registerUser');
-    redis.findUser(jid, function(err,res) {
+    redisModel.findUser(jid, function(err,res) {
         if(!err) {
         	debug('registeration failed. User already exists');
             options.error("There is already a user with that jid");
         } else {
-            redis.saveUser(jid,password,function() {
+            redisModel.saveUser(jid,password,function() {
             	debug('Registration success');
                 options.success(user);
             });
@@ -33,11 +33,11 @@ redis.registerUser = function(jid, password) {
     
 }
 
-redis.saveUser = function(jid,password,callback) {
+redisModel.saveUser = function(jid,password,callback) {
     debug("saveUser", jid);
     client.sadd("user", jid, function(err, obj) {
         callback(err, this);
     });
 };
 
-exports.redis = redis;
+module.exports = redisModel;
