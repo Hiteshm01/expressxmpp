@@ -1,1 +1,4 @@
-blinder.js
+var blinder = {
+	
+}
+module.exports = blinder;

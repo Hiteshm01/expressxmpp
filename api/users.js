@@ -1,1 +1,4 @@
-users.js
+var users = {
+	
+}
+module.exports = users;

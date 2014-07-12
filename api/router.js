@@ -1,1 +1,4 @@
-router.js
+var router = {
+	
+}
+module.exports = router;
