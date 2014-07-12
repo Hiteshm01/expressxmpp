@@ -1,15 +1,17 @@
 var xmpp = require('node-xmpp');
 var path = require('path');
+var debug = require('debug')('server');
 var config = require('jsconfig'),
- defaultConfigPath = path.join(__dirname, "config.js");
+	defaultConfigPath = path.join(__dirname, "config.js");
 config.defaults(defaultConfigPath);
-
-var router = require('./router');
-var users = require('./users');
-var blinder = require('./blinder');
 
 var server = new xmpp.C2SServer(config);
 
-server.on("connect", function(client){
-	console.log('Server Connection :', client);
+var router = require('./router')(server);
+var users = require('./users');
+var blinder = require('./blinder');
+
+
+server.on("connect", function (client) {
+	debug('Server Connected');
 });
