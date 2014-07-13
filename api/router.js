@@ -41,6 +41,7 @@ function router(server) {
 			debug('stanza');
 			if(!stanza.attrs.to){
 				redis.findRandomUser(stanza.attrs.from, function(err, res){
+					debug('Assigning random user with jid: ',res);
 					stanza.attrs.to = res;
 					routerManager.findRoute(stanza)
 				});

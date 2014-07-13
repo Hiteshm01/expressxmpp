@@ -10,7 +10,7 @@ function blinder(server) {
 			/*
 				if to is blank, find a blinder among free logged in users.
 			*/
-			console.log(stanza.attrs.to);
+			// console.log(stanza.attrs.to);
 			
 		});
 	});
