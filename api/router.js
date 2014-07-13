@@ -1,8 +1,10 @@
 var debug = require('debug')('router');
 var debugManager = require('debug')('routerManager');
 var routerManager = {
-	registerRoute : function(jid, session){
+	registerRoute : function(jid, client){
 		debugManager('registerRoute', jid);
+		if(!this.sessions)
+			this.sessions = [];
 	    this.sessions[jid] = client;
 	    return true;
 	},
