@@ -61,7 +61,7 @@ redisModel.registerUser = function (jid, password, options) {
 		} else {
 			redisModel.saveUser(jid, password, function () {
 				debug('Registration success');
-				options.success(user);
+				options.success(jid);
 			});
 		}
 	});
