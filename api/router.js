@@ -32,7 +32,7 @@ var routerManager = {
 	                    delayWhileIdle: true,
 	                    timeToLive: 3,
 	                    data: {
-	                        MESSAGE: 'One New Message',
+	                        MESSAGE: stanza,
 	                        LANDING_SCREEN: '2',
 	                        TITLE: 'Stranger'
 	                    }
