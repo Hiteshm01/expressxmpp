@@ -7,9 +7,9 @@ config.defaults(defaultConfigPath);
 
 var server = new xmpp.C2SServer(config);
 
+var blinder = require('./blinder')(server);
 var router = require('./router')(server);
 var users = require('./users')(server);
-var blinder = require('./blinder')(server);
 
 
 server.on("connect", function (client) {

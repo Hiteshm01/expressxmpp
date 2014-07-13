@@ -16,6 +16,7 @@
     "node-gcm": "~0.9.11",
     "node-xmpp": "~1.0.0-alpha2",
     "anydb-sql": "~0.6.16",
-    "jsconfig": "~0.2.0"
+    "jsconfig": "~0.2.0",
+    "ltx": "~0.5.2"
   }
 }
