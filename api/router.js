@@ -2,6 +2,8 @@ var debug = require('debug')('router');
 var debugManager = require('debug')('routerManager');
 var ltx = require('ltx');
 var self = this;
+var redis = require('../model/redis');
+
 var routerManager = {
 	registerRoute : function(jid, client){
 		debugManager('registerRoute', jid);
