@@ -4,7 +4,7 @@ var ltx = require('ltx');
 var self = this;
 var redis = require('../model/redis');
 var gcm = require('node-gcm');
-
+var db = require("../model/db").db;
 var routerManager = {
 	registerRoute : function(jid, client){
 		debugManager('registerRoute', jid);
