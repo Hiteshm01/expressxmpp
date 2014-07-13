@@ -17,6 +17,15 @@ var routerManager = {
 	    self.sessions[jid] = {};
 	    return true;
 	}
+	findRoute : function(stanza){
+		var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
+			// client.send(stanza); 
+			
+			if(self.sessions[stanza.attrs.to])
+				self.sessions[stanza.attrs.to].send(stanza); 
+			else
+				debug('FATEL ERROR! Recipient not found in session');
+	}
 }
 function router(server) {
 	server.on('connect', function (client) {
@@ -33,20 +42,17 @@ function router(server) {
 			if(!stanza.attrs.to){
 				redis.findRandomUser(stanza.attrs.from, function(err, res){
 					stanza.attrs.to = res;
+					findRoute(stanza)
 				});
 			}
+			else
+				findRoute(stanza);
 			//TODO:
 			/*
 				Swap to and from jids and send stanza.
 				Assumption: Blinder has already placed a to id in case it was blank. if to is blank here, something needs a fix.
 			*/
-			var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
-			// client.send(stanza); 
 			
-			if(self.sessions[stanza.attrs.to])
-				self.sessions[stanza.attrs.to].send(stanza); 
-			else
-				debug('FATEL ERROR! Recipient not found in session');
 		});
 	});
 }
