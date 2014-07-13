@@ -20,9 +20,10 @@ var routerManager = {
 	findRoute : function(stanza){
 		var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
 			// client.send(stanza); 
-			
-			if(self.sessions[stanza.attrs.to])
-				self.sessions[stanza.attrs.to].send(stanza); 
+			var to = stanza.attrs.to;
+			to = stanza.attrs.to.split('@')[0];
+			if(self.sessions[to])
+				self.sessions[to].send(stanza); 
 			else
 				debug('FATEL ERROR! Recipient not found in session');
 	}
