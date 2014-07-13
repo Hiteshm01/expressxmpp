@@ -22,7 +22,7 @@ redisModel.findRandomUser = function (currjid, cb) {
 	var timer;
 	client.srandmember("user", function (err, res) {
 		if (!err) {
-			if (res != currjid) {
+			if (res != currjid.split('@')[0]) {
 				debug('random user found', res)
 				return cb(null, res);
 			} else {
