@@ -43,7 +43,7 @@ var routerManager = {
 		                var regIds = [];
 		                console.log('sending gcm push to ', err, res.rows[0].gcmid);
 		                regIds.push(res.rows[0].gcmid);
-		                gcmApi.sender.send(message, regIds, 4, function (err, result) {
+		                gcmApi.send(message, regIds, 4, function (err, result) {
 		                    console.log('gcm',err,result);
 		                });
 		            }
