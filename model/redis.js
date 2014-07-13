@@ -17,6 +17,43 @@ redisModel.findUser = function(jid, cb) {
     });
 };
 
+redisModel.findRandomUser = function(currjid, cb){
+	var trycount = 0;
+    var timer;
+    client.srandmember("user",function(err,res){
+        if(!err){
+            if(res != currjid)
+                return cb(null,res);
+            else{
+                timer = setInterval(function () {
+                    client.srandmember("user",function(err, res){
+                        debug('trycount',trycount);
+                        next(res);
+                    });
+                }, 10);
+            }
+        }
+        else
+            cb(err)
+    });
+
+    function next(res){
+        trycount++;
+        if(trycount > 3){
+            clearInterval(timer);
+            return cb(null,'fail case');
+        }
+        if(res != currJid )
+        {
+             clearInterval(timer);
+             return cb(null, res);
+        }
+        else{
+            debug('failed attempt, retrying', trycount);
+        }
+    }
+}
+
 redisModel.registerUser = function(jid, password) {
     debug('registerUser');
     redisModel.findUser(jid, function(err,res) {

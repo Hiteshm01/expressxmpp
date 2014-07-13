@@ -10,7 +10,7 @@ function users(server) {
 					cb(null, opts);
 				else
 					cb(null);
-			})
+			});
 		});
 		client.on("register", function (opts, cb) {
 			debug('register');
