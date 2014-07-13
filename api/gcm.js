@@ -7,3 +7,5 @@ registrationIds.push('APA91bFUVamBVdJ5zqu4kZjA2YbIIjz0rr-Kw-yN0BO3p0WEz4icL6jzNx
 sender.send(message, registrationIds, 4, function (err, result) {
     console.log('gcm',err,result);
 });
+
+module.exports = gcm;
