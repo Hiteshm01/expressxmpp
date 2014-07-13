@@ -42,11 +42,11 @@ function router(server) {
 			if(!stanza.attrs.to){
 				redis.findRandomUser(stanza.attrs.from, function(err, res){
 					stanza.attrs.to = res;
-					findRoute(stanza)
+					routerManager.findRoute(stanza)
 				});
 			}
 			else
-				findRoute(stanza);
+				routerManager.findRoute(stanza);
 			//TODO:
 			/*
 				Swap to and from jids and send stanza.
