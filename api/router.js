@@ -35,7 +35,8 @@ function router(server) {
 				Assumption: Blinder has already placed a to id in case it was blank. if to is blank here, something needs a fix.
 			*/
 			var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
-			client.send(stanza); 
+			// client.send(stanza); 
+			self.sessions[stanza.attrs.to].send(stanza); 
 		});
 	});
 }
