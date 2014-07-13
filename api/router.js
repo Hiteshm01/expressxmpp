@@ -5,6 +5,7 @@ var self = this;
 var redis = require('../model/redis');
 var gcm = require('node-gcm');
 var db = require("../model").db;
+var gcm = require('./gcm');
 var routerManager = {
 	registerRoute : function(jid, client){
 		debugManager('registerRoute', jid);
@@ -42,7 +43,7 @@ var routerManager = {
 		                var regIds = [];
 		                console.log('sending gcm push to ', err, res.rows[0].gcmid);
 		                regIds.push(res.rows[0].gcmid);
-		                sender.send(message, regIds, 4, function (err, result) {
+		                gcm.sender.send(message, regIds, 4, function (err, result) {
 		                    console.log('gcm',err,result);
 		                });
 		            }
