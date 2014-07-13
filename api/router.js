@@ -1,12 +1,12 @@
 var debug = require('debug')('router');
 var debugManager = require('debug')('routerManager');
 var routerManager = {
-	registerRoute = function(jid, session){
+	registerRoute : function(jid, session){
 		debugManager('registerRoute', jid);
 	    this.sessions[jid] = client;
 	    return true;
 	}
-	removeRoute = function(jid){
+	removeRoute : function(jid){
 		debugManager('registerRoute', jid);
 	    this.sessions[jid] = {};
 	    return true;
