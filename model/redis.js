@@ -43,7 +43,7 @@ redisModel.findRandomUser = function (currjid, cb) {
 			clearInterval(timer);
 			return cb(null, 'fail case');
 		}
-		if (res != currJid) {
+		if (res != currjid) {
 			clearInterval(timer);
 			return cb(null, res);
 		} else {
