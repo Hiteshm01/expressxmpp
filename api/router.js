@@ -5,7 +5,7 @@ var routerManager = {
 		debugManager('registerRoute', jid);
 	    this.sessions[jid] = client;
 	    return true;
-	}
+	},
 	removeRoute : function(jid){
 		debugManager('registerRoute', jid);
 	    this.sessions[jid] = {};
