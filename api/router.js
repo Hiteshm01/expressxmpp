@@ -28,7 +28,11 @@ function router(server) {
 		});
 		client.on('stanza', function (stanza) {
 			debug('stanza');
-
+			if(!stanza.attrs.to){
+				redis.findRandomUser(stanza.attrs.from, function(err, res){
+					stanza.attrs.to = res;
+				});
+			}
 			//TODO:
 			/*
 				Swap to and from jids and send stanza.

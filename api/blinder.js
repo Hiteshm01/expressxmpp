@@ -10,11 +10,8 @@ function blinder(server) {
 			/*
 				if to is blank, find a blinder among free logged in users.
 			*/
-			if(!stanza.attrs.to){
-				redis.findRandomUser(stanza.attrs.from, function(err, res){
-					stanza.attrs.to = res;
-				});
-			}
+			console.log(stanza.attrs.to);
+			
 		});
 	});
 }

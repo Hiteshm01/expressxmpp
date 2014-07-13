@@ -23,6 +23,7 @@ redisModel.findRandomUser = function(currjid, cb){
     client.srandmember("user",function(err,res){
         if(!err){
             if(res != currjid)
+            	debug('random user found', res)
                 return cb(null,res);
             else{
                 timer = setInterval(function () {
