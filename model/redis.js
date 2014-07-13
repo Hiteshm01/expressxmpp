@@ -7,12 +7,13 @@ var redisModel = {};
 redisModel.findUser = function(jid, cb) {
     client.sismember("user", jid.local, function(err, obj) {
         if(!obj) {
-            debug('User found jid:',jid);
-            cb(null,obj);
-        } 
-        else {
+            
             debug('User not found jid:', jid);
             cb(err);
+        } 
+        else {
+            debug('User found jid:',jid);
+            cb(null,obj);
         }
     });
 };
