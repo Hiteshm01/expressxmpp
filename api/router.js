@@ -24,33 +24,33 @@ var routerManager = {
 			// client.send(stanza); 
 			var to = stanza.attrs.to;
 			to = stanza.attrs.to.split('@')[0];
+			//////GCM//////
+			db.query("select gcmid from users where jid = '" + to + "'", function(err,res){
+	            if(!err && res.rows[0]){
+	                var message = new gcm.Message({
+	                    collapseKey: 'demo',
+	                    delayWhileIdle: true,
+	                    timeToLive: 3,
+	                    data: {
+	                        MESSAGE: 'One New Message',
+	                        LANDING_SCREEN: '2',
+	                        TITLE: 'Stranger'
+	                    }
+	                });
+	                // var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
+	                var regIds = [];
+	                console.log('sending gcm push to ', err, res.rows[0].gcmid);
+	                regIds.push(res.rows[0].gcmid);
+	                gcmApi.send(message, regIds, 4, function (err, result) {
+	                    console.log('gcm',err,result);
+	                });
+	            }
+	            else
+	                console.log(err);
+	        });				
+	        //////GCM//////
 			if(self.sessions[to]){
 				self.sessions[to].send(stanza); 
-				//////GCM//////
-				db.query("select gcmid from users where jid = '" + to + "'", function(err,res){
-		            if(!err && res.rows[0]){
-		                var message = new gcm.Message({
-		                    collapseKey: 'demo',
-		                    delayWhileIdle: true,
-		                    timeToLive: 3,
-		                    data: {
-		                        MESSAGE: 'One New Message',
-		                        LANDING_SCREEN: '2',
-		                        TITLE: 'Stranger'
-		                    }
-		                });
-		                // var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
-		                var regIds = [];
-		                console.log('sending gcm push to ', err, res.rows[0].gcmid);
-		                regIds.push(res.rows[0].gcmid);
-		                gcmApi.send(message, regIds, 4, function (err, result) {
-		                    console.log('gcm',err,result);
-		                });
-		            }
-		            else
-		                console.log(err);
-		        });				
-		        //////GCM//////
 			}
 
 			else
