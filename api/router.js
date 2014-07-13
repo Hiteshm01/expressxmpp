@@ -1,16 +1,17 @@
 var debug = require('debug')('router');
 var debugManager = require('debug')('routerManager');
+var self = this;
 var routerManager = {
 	registerRoute : function(jid, client){
 		debugManager('registerRoute', jid);
-		if(!this.sessions)
-			this.sessions = [];
-	    this.sessions[jid] = client;
+		if(!self.sessions)
+			self.sessions = [];
+	    self.sessions[jid] = client;
 	    return true;
 	},
 	removeRoute : function(jid){
 		debugManager('registerRoute', jid);
-	    this.sessions[jid] = {};
+	    self.sessions[jid] = {};
 	    return true;
 	}
 }
@@ -26,7 +27,7 @@ function router(server) {
 		});
 		client.on('stanza', function (stanza) {
 			debug('stanza');
-			this.sessions[client.jid.local].send(stanza); 
+			self.sessions[client.jid.local].send(stanza); 
 		});
 	});
 }
