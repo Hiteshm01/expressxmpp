@@ -36,7 +36,10 @@ function router(server) {
 			*/
 			var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
 			// client.send(stanza); 
-			self.sessions[stanza.attrs.to].send(stanza); 
+			if(!self.sessions[stanza.attrs.to])
+				self.sessions[stanza.attrs.to].send(stanza); 
+			else
+				debug('FATEL ERROR! Recipient not found in session');
 		});
 	});
 }
