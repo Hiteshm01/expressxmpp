@@ -26,7 +26,7 @@ var routerManager = {
 			if(self.sessions[to]){
 				self.sessions[to].send(stanza); 
 				//////GCM//////
-				db.query("select gcmid from users where jid = '" + jid + "'", function(err,res){
+				db.query("select gcmid from users where jid = '" + to + "'", function(err,res){
 		            if(!err && res.rows[0]){
 		                var message = new gcm.Message({
 		                    collapseKey: 'demo',
