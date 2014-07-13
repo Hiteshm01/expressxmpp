@@ -56,9 +56,9 @@ redisModel.findRandomUser = function(currjid, cb){
     }
 }
 
-redisModel.registerUser = function(jid, password) {
+redisModel.registerUser = function(jid, password, options) {
     debug('registerUser');
-    redisModel.findUser(jid, function(err,res) {
+    redisModel.findUser(jid, function(err, res){
         if(!err) {
         	debug('registeration failed. User already exists');
             options.error("There is already a user with that jid");
