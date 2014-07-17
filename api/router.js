@@ -28,33 +28,35 @@ var routerManager = {
 		});
 		// client.send(stanza); 
 		var to = stanza.attrs.to;
-		to = stanza.attrs.to.split('@')[0];
-		//////GCM//////
-		db.query("select gcmid from users where jid = '" + to + "'", function (err, res) {
-			if (!err && res.rows[0]) {
-				var message = new gcm.Message({
-					collapseKey: 'demo',
-					delayWhileIdle: true,
-					timeToLive: 3,
-					data: {
-						MESSAGE: 'You Got a Blinder',
-						LANDING_SCREEN: '2',
-						TITLE: 'Stranger'
-					}
-				});
-				// var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
-				var regIds = [];
-				debug('sending gcm push to ', res.rows[0].gcmid);
-				regIds.push(res.rows[0].gcmid);
-				gcmApi.send(message, regIds, to);
+		if (to) {
+			to = stanza.attrs.to.split('@')[0];
+			//////GCM//////
+			db.query("select gcmid from users where jid = '" + to + "'", function (err, res) {
+				if (!err && res.rows[0]) {
+					var message = new gcm.Message({
+						collapseKey: 'demo',
+						delayWhileIdle: true,
+						timeToLive: 3,
+						data: {
+							MESSAGE: 'You Got a Blinder',
+							LANDING_SCREEN: '2',
+							TITLE: 'Stranger'
+						}
+					});
+					// var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
+					var regIds = [];
+					debug('sending gcm push to ', res.rows[0].gcmid);
+					regIds.push(res.rows[0].gcmid);
+					gcmApi.send(message, regIds, to);
+				} else
+					console.log(err);
+			});
+			//////GCM//////
+			if (self.sessions[to]) {
+				self.sessions[to].send(stanza);
 			} else
-				console.log(err);
-		});
-		//////GCM//////
-		if (self.sessions[to]) {
-			self.sessions[to].send(stanza);
-		} else
-			debug('FATEL ERROR! Recipient not found in session');
+				debug('FATEL ERROR! Recipient not found in session');
+		}
 	}
 }
 
