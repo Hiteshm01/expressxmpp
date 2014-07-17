@@ -7,7 +7,7 @@ function users(server) {
 			debug('authenticate',opts.jid.local);
 			redis.registerUser(opts.jid.local, opts.password,{
 				success: function () {
-					debug('success');
+					debug('authenticate success');
 				},
 				error: function () {
 					debug('error');
@@ -24,7 +24,7 @@ function users(server) {
 			debug('register');
 			redis.registerUser(opts.jid.local, opts.password, {
 				success: function () {
-					debug('success');
+					debug(' register success');
 				},
 				error: function () {
 					debug('error');
