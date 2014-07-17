@@ -10,10 +10,10 @@ function roster(server) {
 
 		client.on('stanza', function (stanza) {
 			debug('stanza');
+			var query = null;
 			if (stanza.is('iq') && (query = stanza.getChild('query', "jabber:iq:roster"))) {
 				if (stanza.attrs.type === "get") {
 					stanza.attrs.type = "result";
-					var query = null;
 					redis.findRandomUser(stanza.attrs.from, function (err, res) {
 						debug('Assigning random user with jid: ', res);
 						stanza.attrs.to = stanza.attrs.from;
