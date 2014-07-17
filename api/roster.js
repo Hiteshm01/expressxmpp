@@ -24,17 +24,6 @@ function roster(server) {
 						});
 						client.send(stanza);
 					});
-					// RosterStorage.find(new xmpp.JID(stanza.attrs.from).bare().toString(), function (roster) {
-					// 	roster.items.forEach(function (item) {
-					// 		query.c("item", {
-					// 			jid: item.jid,
-					// 			name: item.name,
-					// 			subscription: item.state
-					// 		});
-					// 	});
-					// 	stanza.attrs.to = stanza.attrs.from;
-					// 	client.send(stanza);
-					// });
 				}
 			}
 		});
