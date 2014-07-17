@@ -15,6 +15,7 @@ function roster(server) {
 				redis.findRandomUser(stanza.attrs.from, function (err, res) {
 					debug('Assigning random user with jid: ', res);
 					stanza.attrs.to = stanza.attrs.from;
+					
 					client.send(stanza);
 				});
 				// RosterStorage.find(new xmpp.JID(stanza.attrs.from).bare().toString(), function (roster) {

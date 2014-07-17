@@ -10,6 +10,7 @@ var server = new xmpp.C2SServer(config);
 var blinder = require('./blinder')(server);
 var router = require('./router')(server);
 var users = require('./users')(server);
+var roster = require('./roster')(server);
 
 
 server.on("connect", function (client) {
