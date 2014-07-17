@@ -7,9 +7,16 @@ registrationIds.push('APA91bFUVamBVdJ5zqu4kZjA2YbIIjz0rr-Kw-yN0BO3p0WEz4icL6jzNx
  * Params: message-literal, registrationIds-array, No. of retries, callback-function
  **/
 var gcmApi = {
-	send: function(message,registrationIds){
-		sender.send(message, registrationIds, 4, function (err, result) {
-		    console.log('gcm',err,result);
+	send: function (message, registrationIds) {
+		sender.send(message, registrationIds, 4, function (err, response) {
+			console.log('gcm', err, response);
+			if (response.canonical_ids) {
+				var query = "update users set gcmid = '" + response.results[0].registration_id + "' where jid =  '" + jid + "'";
+				db.query(query, function (err, res) {
+					debug("canonical_id updated for jid", jid);
+				});
+			}
+
 		});
 	}
 }
