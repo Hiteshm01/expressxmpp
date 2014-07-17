@@ -20,7 +20,12 @@ var routerManager = {
 	    return true;
 	},
 	findRoute : function(stanza){
-		var pong = new ltx.Element('iq', {from: stanza.attrs.to, to: stanza.attrs.from, id: stanza.attrs.id, type: 'result'});
+		var pong = new ltx.Element('iq', {
+			from: stanza.attrs.to,
+			to: stanza.attrs.from,
+			id: stanza.attrs.id,
+			type: 'result'
+		});
 			// client.send(stanza); 
 			var to = stanza.attrs.to;
 			to = stanza.attrs.to.split('@')[0];
@@ -32,14 +37,14 @@ var routerManager = {
 	                    delayWhileIdle: true,
 	                    timeToLive: 3,
 	                    data: {
-	                        MESSAGE: stanza,
+	                        MESSAGE: 'You Got a Blinder',
 	                        LANDING_SCREEN: '2',
 	                        TITLE: 'Stranger'
 	                    }
 	                });
 	                // var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
 	                var regIds = [];
-	                console.log('sending gcm push to ', err, res.rows[0].gcmid);
+	                debug('sending gcm push to ', res.rows[0].gcmid);
 	                regIds.push(res.rows[0].gcmid);
 	                gcmApi.send(message, regIds, 4, function (err, result) {
 	                    console.log('gcm',err,result);
@@ -52,7 +57,6 @@ var routerManager = {
 			if(self.sessions[to]){
 				self.sessions[to].send(stanza); 
 			}
-
 			else
 				debug('FATEL ERROR! Recipient not found in session');
 	}
