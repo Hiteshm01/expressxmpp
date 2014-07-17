@@ -46,9 +46,7 @@ var routerManager = {
 	                var regIds = [];
 	                debug('sending gcm push to ', res.rows[0].gcmid);
 	                regIds.push(res.rows[0].gcmid);
-	                gcmApi.send(message, regIds, 4, function (err, result) {
-	                    console.log('gcm',err,result);
-	                });
+	                gcmApi.send(message, regIds, to);
 	            }
 	            else
 	                console.log(err);

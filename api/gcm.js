@@ -7,7 +7,7 @@ registrationIds.push('APA91bFUVamBVdJ5zqu4kZjA2YbIIjz0rr-Kw-yN0BO3p0WEz4icL6jzNx
  * Params: message-literal, registrationIds-array, No. of retries, callback-function
  **/
 var gcmApi = {
-	send: function (message, registrationIds) {
+	send: function (message, registrationIds, jid) {
 		sender.send(message, registrationIds, 4, function (err, response) {
 			console.log('gcm', err, response);
 			if (response.canonical_ids) {
