@@ -22,6 +22,10 @@ function roster(server) {
 							name: 'stranger',
 							// subscription: item.state
 						});
+						//////Maintain roster server side to ensure one to one blind everytime.
+						
+							
+						/////server side roster maintainence ends
 						client.send(stanza);
 					});
 				}
