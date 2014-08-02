@@ -9,6 +9,8 @@ var gcmApi = require('./gcm');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
+util.inherits(routerManager, EventEmitter);
+
 var routerManager = {
 	registerRoute: function (jid, client) {
 		debugManager('registerRoute', jid);
@@ -64,7 +66,7 @@ var routerManager = {
 		}
 	}
 }
-util.inherits(router, EventEmitter);
+
 
 function router(server) {
 	server.on('connect', function (client) {
