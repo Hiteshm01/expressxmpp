@@ -54,8 +54,10 @@ var routerManager = {
 			//////GCM//////
 			if (self.sessions[to]) {
 				self.sessions[to].send(stanza);
-			} else
+			} else{
+				self.emit("recipientOffline", stanza);
 				debug('FATEL ERROR! Recipient not found in session');
+			}
 		}
 	}
 }
