@@ -9,7 +9,7 @@ var gcmApi = require('./gcm');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
-util.inherits(routerManager, EventEmitter);
+// util.inherits(routerManager, EventEmitter);
 
 var routerManager = {
 	registerRoute: function (jid, client) {
@@ -61,6 +61,7 @@ var routerManager = {
 				self.sessions[to].send(stanza);
 			} else{
 				self.emit("recipientOffline", stanza);
+				EventEmitter.call(self);
 				debug('FATEL ERROR! Recipient not found in session');
 			}
 		}
