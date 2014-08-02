@@ -6,6 +6,9 @@ var redis = require('../model/redis');
 var gcm = require('node-gcm');
 var db = require("../model").db;
 var gcmApi = require('./gcm');
+var util = require('util');
+var EventEmitter = require('events').EventEmitter;
+
 var routerManager = {
 	registerRoute: function (jid, client) {
 		debugManager('registerRoute', jid);
@@ -61,6 +64,7 @@ var routerManager = {
 		}
 	}
 }
+util.inherits(router, EventEmitter);
 
 function router(server) {
 	server.on('connect', function (client) {
