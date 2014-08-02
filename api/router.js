@@ -60,8 +60,8 @@ var routerManager = {
 			if (self.sessions[to]) {
 				self.sessions[to].send(stanza);
 			} else{
-				self.emit("recipientOffline", stanza);
 				EventEmitter.call(self);
+				self.emit("recipientOffline", stanza);
 				debug('FATEL ERROR! Recipient not found in session');
 			}
 		}
