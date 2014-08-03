@@ -8,7 +8,8 @@ var ltx = require('ltx');
 function Offline() {
 }
 
-exports.configure = function(server, config) {
+exports.configure = function(server) {
+	console.log('in offline')
     server.router.on("recipientOffline", function(stanza) {
         if(stanza.is("message")) {
         	debug('Received a message for offline client, Will save it till he comes back.');

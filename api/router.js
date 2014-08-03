@@ -7,7 +7,8 @@ var gcm = require('node-gcm');
 var db = require("../model").db;
 var gcmApi = require('./gcm');
 var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+var events = require('events');
+var EventEmitter = events.EventEmitter;
 
 // util.inherits(routerManager, EventEmitter);
 
@@ -60,7 +61,6 @@ var routerManager = {
 			if (self.sessions[to]) {
 				self.sessions[to].send(stanza);
 			} else{
-				EventEmitter.call(self);
 				self.emit("recipientOffline", stanza);
 				debug('FATEL ERROR! Recipient not found in session');
 			}
@@ -99,4 +99,5 @@ function router(server) {
 		});
 	});
 }
+util.inherits(router, EventEmitter);
 module.exports = router;
