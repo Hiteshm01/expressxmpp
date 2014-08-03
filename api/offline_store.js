@@ -5,12 +5,9 @@ var Message = message.Message;
 var ltx = require('ltx');
 
 // http://xmpp.org/extensions/xep-0160.html
-function Offline() {
-}
-
-exports.configure = function(server) {
-	console.log('in offline')
-    server.router.on("recipientOffline", function(stanza) {
+function offline(server) {
+	
+    server.on("recipientOffline", function(stanza) {
         if(stanza.is("message")) {
         	debug('Received a message for offline client, Will save it till he comes back.');
             stanza.c("delay", {xmlns: 'urn:xmpp:delay', from: '', stamp: ISODateString(new Date())}).t("Offline Storage");
@@ -43,3 +40,4 @@ function ISODateString(d) {
     + pad(d.getUTCSeconds())+'Z'
 }
 
+module.exports = offline;
