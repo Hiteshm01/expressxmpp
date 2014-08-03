@@ -59,14 +59,15 @@ function router(server) {
 				//////GCM//////
 				db.query("select gcmid from users where jid = '" + to + "'", function (err, res) {
 					if (!err && res.rows[0]) {
+						console.log(stanza.children[0].children[0]);
 						var message = new gcm.Message({
 							collapseKey: 'demo',
 							delayWhileIdle: true,
 							timeToLive: 3,
 							data: {
-								MESSAGE: 'You Got a Blinder',
+								MESSAGE: stanza.children[0].children[0],
 								LANDING_SCREEN: '2',
-								TITLE: 'Stranger'
+								TITLE: 'New Message'
 							}
 						});
 						// var sender = new gcm.Sender('AIzaSyBcDCcYsu1bVrBviVSNONxOh01-ywbekO8');
